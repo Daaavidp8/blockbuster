@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PeliculasControler;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    $users = \App\Models\User::get();
+    return view('inicio',compact('users'));
+})->name('inicio');
+
+Route::resource('peliculas',PeliculasControler::class);
+
+Route::post('filtro', [PeliculasControler::class,'filtro'])->name('resultado_filtro');
+
+
+Route::get('filtro', function () {
+    $peliculas = \App\Models\Pelicula::get();
+    return view('peliculas.filtro',compact('peliculas'));
+})->name('filtro_director');
+

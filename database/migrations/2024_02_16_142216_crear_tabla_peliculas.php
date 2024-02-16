@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+        Schema::create('peliculas', function (Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->string('title');
+            $table->string('year');
+            $table->string('director');
+            $table->string('protagonista');
+            $table->string('poster');
+            $table->boolean('rented');
+            $table->text('synopsis');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('peliculas');
     }
 };
